@@ -10,7 +10,7 @@ let books = [
 ];
 
 // GET all books
-app.get('/books', (req, res) => {
+app.get('/api', (req, res) => {
   res.json(books);
 });
 
