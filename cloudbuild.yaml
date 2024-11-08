@@ -7,26 +7,6 @@ steps:
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/bangkit-441110/books-api:$SHORT_SHA']
-    
-  # Deploy to staging (on develop branch)
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - 'run'
-      - 'deploy'
-      - 'books-api-staging'
-      - '--image'
-      - 'gcr.io/bangkit-441110/books-api:$SHORT_SHA'
-      - '--region'
-      - 'asia-southeast2'  # Changed to Jakarta region
-      - '--platform'
-      - 'managed'
-      - '--allow-unauthenticated'
-      - '--set-env-vars'
-      - 'ENVIRONMENT=staging'
-    id: 'deploy-staging'
-    when:
-      - $BRANCH_NAME == "develop"
 
   # Deploy to production (on main branch)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
