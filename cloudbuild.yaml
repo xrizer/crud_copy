@@ -2,11 +2,11 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/pemilu-2024-ind/books-api:$SHORT_SHA', '.']
+    args: ['build', '-t', 'gcr.io/bangkit-441110/books-api:$SHORT_SHA', '.']
     
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/pemilu-2024-ind/books-api:$SHORT_SHA']
+    args: ['push', 'gcr.io/bangkit-441110/books-api:$SHORT_SHA']
     
   # Deploy to staging (on develop branch)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -16,7 +16,7 @@ steps:
       - 'deploy'
       - 'books-api-staging'
       - '--image'
-      - 'gcr.io/pemilu-2024-ind/books-api:$SHORT_SHA'
+      - 'gcr.io/bangkit-441110/books-api:$SHORT_SHA'
       - '--region'
       - 'asia-southeast2'  # Changed to Jakarta region
       - '--platform'
@@ -36,7 +36,7 @@ steps:
       - 'deploy'
       - 'books-api-prod'
       - '--image'
-      - 'gcr.io/pemilu-2024-ind/books-api:$SHORT_SHA'
+      - 'gcr.io/bangkit-441110/books-api:$SHORT_SHA'
       - '--region'
       - 'asia-southeast2'  # Changed to Jakarta region
       - '--platform'
@@ -49,4 +49,4 @@ steps:
       - $BRANCH_NAME == "main"
 
 images:
-  - 'gcr.io/pemilu-2024-ind/books-api:$SHORT_SHA'
+  - 'gcr.io/bangkit-441110/books-api:$SHORT_SHA'
